@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: user1-depl
+  name: user-depl
 spec:
   replicas: 1 
   selector: 
     matchLabels:
-      app: user1 
+      app: user 
   template: 
     metadata: 
       labels:
-        app: user1
+        app: user
     spec:
       containers:
-        - name: user1
-          image: anshadkt/user
+        - name: user
+          image: anshadkt/userimg
           env:
             - name: MONGO_URL
-              value: mongodb://user1-mongo-srv/schedulease
+              value: mongodb://user-mongo-srv/schedulease
             - name: JWT_KEY 
               valueFrom: 
                 secretKeyRef:
@@ -32,12 +32,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: user1-srv
+  name: user-srv
 spec:
   selector:
-    app: user1
+    app: user
   ports:
-    - name: user1
+    - name: user
       protocol: TCP
       port: 3000
       targetPort: 3000

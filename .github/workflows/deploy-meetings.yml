@@ -1,0 +1,24 @@
+name: deploy-meeting
+
+on: 
+  push:
+    branches:    
+      - master
+    paths:
+      - 'meeting/**'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:   
+      - uses: actions/checkout@v2
+      - run: cd meeting && docker build -t anshadkt/meeting .
+      - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+        env: 
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}  
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      - run: docker push anshadkt/meeting
+      - uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      - run: doctl kubernetes cluster kubeconfig save schedulease-cluster
+      - run: kubectl rollout restart deployment meeting-depl

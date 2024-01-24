@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: meetings1-depl
+  name: meetings-depl
 spec:
   replicas: 1 
   selector: 
     matchLabels:
-      app: meetings1 
+      app: meetings 
   template: 
     metadata: 
       labels:
-        app: meetings1
+        app: meetings
     spec:
       containers:
-        - name: meetings1
+        - name: meetings
           image: anshadkt/meetings
           env:
             - name: MONGO_URL
-              value: mongodb://meetings1-mongo-srv/schedulease
+              value: mongodb://meetings-mongo-srv/schedulease
             - name: JWT_KEY 
               valueFrom: 
                 secretKeyRef:
@@ -28,12 +28,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: meetings1-srv
+  name: meetings-srv
 spec:
   selector:
-    app: meetings1
+    app: meetings
   ports:
-    - name: meetings1
+    - name: meetings
       protocol: TCP
       port: 3000
       targetPort: 3000

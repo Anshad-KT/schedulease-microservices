@@ -17,7 +17,7 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-    - image: anshadkt/user
+    - image: anshadkt/userimg
       context: user 
       docker:
         dockerfile: Dockerfile

@@ -1,29 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: meetings1-mongo-depl
+  name: meetings-mongo-depl
 spec:
   replicas: 1
   selector: 
     matchLabels:    
-      app: meetings1-mongo 
+      app: meetings-mongo 
   template:  
     metadata:  
       labels:   
-        app: meetings1-mongo 
+        app: meetings-mongo 
     spec: 
       containers:
-        - name: meetings1-mongo
+        - name: meetings-mongo
           image: mongo
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: meetings1-mongo-srv
+  name: meetings-mongo-srv
 spec:
   selector:
-    app: meetings1-mongo
+    app: meetings-mongo
   ports:
     - name: db
       protocol: TCP
