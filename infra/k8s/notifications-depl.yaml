@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notifications-depl
+spec:
+  replicas: 1 
+  selector: 
+    matchLabels:
+      app: notifications 
+  template: 
+    metadata: 
+      labels:
+        app: notifications
+    spec:
+      containers:
+        - name: notifications
+          image: anshadkt/notifications
+          env:
+            - name: MONGO_URL
+              value: mongodb://notifications-mongo-srv/schedulease
+            - name: JWT_KEY 
+              valueFrom: 
+                secretKeyRef:
+                  name: jwt-secretcode
+                  key: JWT_KEY
+            - name: NODEPASS 
+              valueFrom: 
+                secretKeyRef:
+                  name: nodepass
+                  key: NODEPASS
+---  
+apiVersion: v1
+kind: Service
+metadata:
+  name: notifications-srv
+spec:
+  selector:
+    app: notifications
+  ports:
+    - name: notifications
+      protocol: TCP
+      port: 3000
+      targetPort: 3000

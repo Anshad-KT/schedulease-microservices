@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nats1-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nats1
+  template:
+    metadata:
+      labels: 
+        app: nats1  
+    spec:  
+      containers:
+        - name: nats1  
+          image: nats-streaming:latest
+          args:
+            - "-p"
+            - "4222" 
+            - "-m"
+            - "8222"
+            - "-hbi"
+            - "5s"
+            - "-hbt"
+            - "5s"
+            - "-hbf"
+            - "2"
+            - "-SD"
+            - "-cid" 
+            - "scheduleease"
+          # env:
+          #   - name: NATS_CLIENT_ID
+          #     value: "mongodb://auth-mongo-srv:27017"
+          #   - name: JWT_KEY
+          #     valueFrom:
+          #       secretKeyRef:
+          #         name: jwt-secret
+          #         key: JWT_KEY        
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nats1-srv
+spec:
+  selector:
+    app: nats1
+  ports:
+    - name: nats1
+      protocol: TCP
+      port: 4222
+      targetPort: 4222
+    - name: monitoring
+      protocol: TCP
+      port: 8222
+      targetPort: 8222
