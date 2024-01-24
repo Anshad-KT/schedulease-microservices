@@ -16,7 +16,7 @@ export class EmailService {
         pass: process.env.NODEPASS,
       },
     });
-  }
+  } 
 
   async sendMail(
     to: string,

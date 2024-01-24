@@ -8,7 +8,7 @@ spec:
     matchLabels:    
       app: notifications-mongo 
   template:  
-    metadata:  
+    metadata:   
       labels:   
         app: notifications-mongo 
     spec: 

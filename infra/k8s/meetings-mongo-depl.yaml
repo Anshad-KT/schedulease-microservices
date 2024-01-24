@@ -7,7 +7,7 @@ spec:
   selector: 
     matchLabels:    
       app: meetings-mongo 
-  template:  
+  template:   
     metadata:  
       labels:   
         app: meetings-mongo 

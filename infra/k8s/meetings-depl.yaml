@@ -12,7 +12,7 @@ spec:
       labels:
         app: meetings
     spec:
-      containers:
+      containers: 
         - name: meetings
           image: anshadkt/meetings
           env:

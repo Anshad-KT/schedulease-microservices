@@ -19,7 +19,7 @@ spec:
             - name: MONGO_URL
               value: mongodb://notifications-mongo-srv/schedulease
             - name: JWT_KEY 
-              valueFrom: 
+              valueFrom:  
                 secretKeyRef:
                   name: jwt-secretcode
                   key: JWT_KEY
