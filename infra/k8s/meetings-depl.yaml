@@ -11,7 +11,7 @@ spec:
     metadata: 
       labels:
         app: meetings
-    spec:
+    spec: 
       containers: 
         - name: meetings
           image: anshadkt/meetings

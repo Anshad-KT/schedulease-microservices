@@ -32,7 +32,7 @@ spec:
                   number: 3000
           - path: /api/notifications/?(.*)
             pathType: Prefix
-            backend:    
+            backend:     
               service: 
                 name: notifications-srv
                 port:

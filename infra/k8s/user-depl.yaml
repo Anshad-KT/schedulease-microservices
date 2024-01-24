@@ -34,7 +34,7 @@ kind: Service
 metadata:
   name: user-srv
 spec: 
-  selector:
+  selector: 
     app: user
   ports:
     - name: user
