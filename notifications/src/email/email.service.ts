@@ -92,7 +92,7 @@ export class EmailService {
                   </strong>
                   <br>
                   Please confirm the date and time.
-                  <a href="http://schedulease.com/confirm/${event}/${to}" style="color: #0069ff;">Confirm Now</a>
+                  <a href="https://schedulease.cloud/confirm/${event}/${to}" style="color: #0069ff;">Confirm Now</a>
                 </p>
       
                 <!-- Invitee Time Zone -->
@@ -189,7 +189,7 @@ export class EmailService {
                     </strong>
                     <br>
                     Please join through Schedulease Meet.
-                    <a href="http://localhost:3000/join/${event}/${to}" style="color: #0069ff;">Join Now</a>
+                    <a href="https://schedulease.cloud/join/${event}/${to}" style="color: #0069ff;">Join Now</a>
                   </p>
         
                   <!-- Invitee Time Zone -->

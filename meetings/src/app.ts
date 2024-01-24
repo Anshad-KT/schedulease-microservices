@@ -27,7 +27,7 @@ app.use("/api", routes(depentencies));
 
 //   res.json("deleted");
 // });
- 
+  
 app.all("*", async (req, res) => {
   throw new NotFoundError();
 });

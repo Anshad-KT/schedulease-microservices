@@ -37,7 +37,7 @@ async function bootstrap() {
         durableName: 'notifications-meetings-service',
         manualAckMode: true,
         deliverAllAvailable: true,
-      },
+      }, 
     ),
   };
 
