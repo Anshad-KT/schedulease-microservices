@@ -96,7 +96,7 @@ console.log("sddsd");
     socket.on('response', async({userId,result,roomId}:{userId:string,result:Boolean,roomId:string})=>{
       console.log(`from ${userId} to room ${roomId} emit-response`);
       socket.to('room'+roomId).emit('hostresponse',{userId,result,roomId})
-    })
+    }) 
     socket.on("join-video-chat", async ({ roomId, user_id }) => {
       await socket.join(roomId)
       console.log("join-video-chat");
