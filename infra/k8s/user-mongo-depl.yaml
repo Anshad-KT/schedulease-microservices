@@ -11,7 +11,7 @@ spec:
     metadata:  
       labels:   
         app: user-mongo 
-    spec: 
+    spec:  
       containers:
         - name: user-mongo
           image: mongo

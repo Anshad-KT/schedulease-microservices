@@ -11,7 +11,7 @@ const start = async () => {
     connectNats()
     connectDB() 
   } catch (err) {
-    console.error(err);
+    console.error(err); 
   } 
 
   app.listen(3000, () => {

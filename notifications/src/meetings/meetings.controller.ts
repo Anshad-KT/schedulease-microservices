@@ -23,13 +23,12 @@ export interface MeetingsCreatedEvent {
   isCompleted: boolean;
 }
 
-@Controller()
+@Controller('/notifications')
 export class MeetingsController {
   constructor(
     private readonly meetingService: MeetingsService,
     private readonly emailService: EmailService,
-    @InjectModel(User.name) private userModel: Model<User>,
-    @InjectModel(Meeting.name) private meetingModel: Model<Meeting>
+
   ) {}
 
   @EventPattern(Patterns.MeetingsCreated)
@@ -102,11 +101,11 @@ export class MeetingsController {
     context.message.ack();
     console.log('meeting:created -acked');
   }
-  @Get('/')
+  @Get('/delete')
   public async getMeetingById(): Promise<any> {
-    const meeting = await this.userModel.deleteMany({});
-    const meetingDeleted = await this.meetingModel.deleteMany({});
+
+    const meetingDeleted = await this.meetingService.deleteAll()
     console.log('deleted');
-    return meeting;
+    return meetingDeleted;
   }
 }

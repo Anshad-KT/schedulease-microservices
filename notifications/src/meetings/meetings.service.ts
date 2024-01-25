@@ -2,11 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Meeting } from './meetings.model';
+import { User } from 'src/users/user.model';
 
 @Injectable()
 export class MeetingsService {
   constructor(
     @InjectModel(Meeting.name) private meetingModel: Model<Meeting>,
+    @InjectModel(User.name) private userModel: Model<User>
   ) {}
 
   async addMeeting(meeting: any): Promise<Meeting | null> {
@@ -42,5 +44,10 @@ export class MeetingsService {
   async getAllMeetingHost(email: string): Promise<Meeting[]> {
     const meetings = await this.meetingModel.find().exec();
     return meetings.filter((m) => m.host === email);
+  }
+  async deleteAll(): Promise<any> {
+    const deletedDocs = await this.meetingModel.deleteMany({});
+    const deletedDocs2 = await this.userModel.deleteMany({});
+    return deletedDocs
   }
 }

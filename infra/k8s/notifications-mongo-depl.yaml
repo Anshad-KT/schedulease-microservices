@@ -12,7 +12,7 @@ spec:
       labels:   
         app: notifications-mongo 
     spec: 
-      containers:
+      containers: 
         - name: notifications-mongo
           image: mongo
 

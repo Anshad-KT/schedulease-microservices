@@ -147,6 +147,6 @@ console.log("sddsd");
 
 
   });
-};
-
+}; 
+ 
 start();

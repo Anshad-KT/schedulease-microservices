@@ -13,7 +13,7 @@ metadata:
     nginx.ingress.kubernetes.io/cross-origin-opener-policy: "same-origin"
 spec:
   rules:
-    - host: "scheduleease.com"
+    - host: "scheduleease.com" 
       http:
         paths:
           - path: /api/meeting/?(.*)
