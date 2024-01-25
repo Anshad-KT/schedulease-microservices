@@ -18,7 +18,7 @@ app.use(
 
 app.use("/api", routes(depentencies));
 
-app.get("/api/user/delete", async (req, res) => {
+app.get("/api/meeting/delete", async (req, res) => {
   await Meeting.deleteMany();
   await User.deleteMany();
   res.json("deleted");
