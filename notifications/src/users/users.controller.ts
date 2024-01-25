@@ -1,5 +1,5 @@
 import { NatsStreamingContext } from '@nestjs-plugins/nestjs-nats-streaming-transport';
-import { Controller } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { Ctx, EventPattern, Payload } from '@nestjs/microservices';
 import { UsersService } from './user.service';
 export enum Patterns {
@@ -11,7 +11,7 @@ export interface UserCreatedEvent {
   username: string;
 }
 
-@Controller()
+@Controller('/notfications')
 export class UsersController {
   constructor(private readonly userService: UsersService) {}
 
@@ -24,4 +24,6 @@ export class UsersController {
     context.message.ack();
     console.log('user:created -acked');
   }
+
+ 
 }
