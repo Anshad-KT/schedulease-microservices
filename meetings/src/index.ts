@@ -24,7 +24,7 @@ const start = async () => {
   const io = new SocketIOServer(httpServer, {
     pingTimeout: 60000,
     cors: {
-      origin: ["https://cybrosis.intellectx.com", "http://cybrosis.intellectx.com"],
+      origin: ["https://cybrosis.intellectx.com", "https://cybrosis.intellectx.com"],
       methods: ["GET", "POST"]
     }
   });
