@@ -14,7 +14,7 @@ app.use(
     signed: false,
     secure: false, 
   })
-);
+); 
 
 app.use("/api", routes(depentencies));
 
@@ -25,7 +25,7 @@ app.get("/api/meeting/delete", async (req, res) => {
 });
    
 app.all("*", async (req, res) => {
-  throw new NotFoundError();
+  throw new NotFoundError(); 
 });
 
 // app.use(ErrorHandler);

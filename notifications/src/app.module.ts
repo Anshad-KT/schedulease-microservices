@@ -13,7 +13,7 @@ import { MongooseModule } from '@nestjs/mongoose';
     NatsStreamingTransport.register({
       clusterId: 'scheduleease', // Specify the cluster ID
       clientId: 'qawsw',
-      connectOptions: {
+      connectOptions: { 
         servers: ['nats://nats1-srv:4222'],
       },
     }),

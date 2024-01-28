@@ -87,11 +87,14 @@ console.log("sddsd");
         console.log(`from ${userId} to room ${roomId} emit- nohost`);
         io.to('room'+roomId).emit('nohost',{roomId,userId,host})
         
-      }
+      } 
     })
     socket.on('reqhost', async({roomId,userId}:{roomId:string,userId:string}) => {
-      console.log(`from ${userId} to room ${roomId} emit-reqhost`);
-      socket.to(roomId).emit('requestuser',{roomId,userId,host:data?.host})
+      console.log(`from ${userId} to room ${roomId} emit-reqhost ${data?.host}`);
+      if(data?.host!==userId){
+        socket.to(roomId).emit('requestuser',{roomId,userId,host:data?.host})
+      }
+      
     })
     socket.on('response', async({userId,result,roomId}:{userId:string,result:Boolean,roomId:string})=>{
       console.log(`from ${userId} to room ${roomId} emit-response`);
@@ -105,7 +108,7 @@ console.log("sddsd");
         let res = await meetingRepository.getMeetingHost(roomId,user_id);
         console.log(res);
         
-        data = res
+        data = res  
       }
       if (!joinedUsersMap.has(roomId)) {
         // If not, create a new entry with an array containing the user_id
@@ -140,13 +143,13 @@ console.log("sddsd");
 
     socket.on("call-end", ({ remoteUser_id, roomId }) => {
       console.log({ remoteUser_id, roomId });
-
+      joinedUsersMap.delete(remoteUser_id);
       socket.to(roomId).emit("call-end", { remoteUser_id, roomId })
       socket.leave(roomId)
     })
 
 
-  });
-}; 
+  }); 
+};  
  
 start();
