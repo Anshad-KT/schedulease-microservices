@@ -26,31 +26,33 @@ export = (dependencies: DepenteniciesData): any => {
      
       if (userPresent) {
         res.json({msg:"something went wrong"})
+      }else{
+        const addedUser = await signUp_UseCase(dependencies).execute({
+          username,
+          email,
+         
+          
+        }); 
+  
+        const token: any = generateToken(addedUser);
+  
+        req.session = {
+          jwt: token,
+          userDetails: addedUser,
+        };
+  
+        await new UserRegisteredPublisher(natsWrapper.client).publish({
+          id: addedUser!.id,
+          email: addedUser!.email,
+          username:addedUser!.username,
+          version:addedUser!.version
+        });
+  
+        res.json({addedUser,jwt:token});
+  
       }
 
-      const addedUser = await signUp_UseCase(dependencies).execute({
-        username,
-        email,
-       
-        
-      }); 
-
-      const token: any = generateToken(addedUser);
-
-      req.session = {
-        jwt: token,
-        userDetails: addedUser,
-      };
-
-      await new UserRegisteredPublisher(natsWrapper.client).publish({
-        id: addedUser!.id,
-        email: addedUser!.email,
-        username:addedUser!.username,
-        version:addedUser!.version
-      });
-
-      res.json({addedUser,jwt:token});
-
+      
       
     } catch (error: any) {
       res.json({msg:"something went wrong"})
