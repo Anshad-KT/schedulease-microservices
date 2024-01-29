@@ -25,7 +25,7 @@ export = (dependencies: DepenteniciesData): any => {
     
      
       if (userPresent) {
-        throw new BadRequestError("Email already in use !");
+        res.json({msg:"something went wrong"})
       }
 
       const addedUser = await signUp_UseCase(dependencies).execute({
