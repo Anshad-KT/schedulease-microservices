@@ -12,7 +12,6 @@ spec:
       labels:
         app: meetings
     spec:   
-      restartPolicy: Always
       containers: 
         - name: meetings
           image: anshadkt/meetings
@@ -22,7 +21,7 @@ spec:
             - name: JWT_KEY 
               valueFrom: 
                 secretKeyRef:
-                  name: jwt-secretcode
+                  name: jwt-secret
                   key: JWT_KEY
  
 ---  
