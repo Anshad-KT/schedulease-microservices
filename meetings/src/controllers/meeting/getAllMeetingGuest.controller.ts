@@ -9,7 +9,7 @@ export = (dependencies: DepenteniciesData): any => {
 interface headertp{
   email:string
 }
-  const getAllMeetingGuest = async (req: any, res: Response, next: NextFunction) => {
+  const getAllMeetingGuest = async (req: Request, res: Response, next: NextFunction) => {
     try {
 console.log(req.headers['accesstoken']?.email as headertp);
 

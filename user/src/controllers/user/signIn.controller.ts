@@ -12,7 +12,7 @@ export = (dependencies: DepenteniciesData): any => {
     try {
       const { email, username } = req.body;
 
-      if (!email) return res.status(500).json({msg:"No email present"})
+      if (!email) return res.status(400).json({msg:"No email present"})
 
 
       const addedUser = await signIn_UseCase(dependencies).execute({
@@ -25,7 +25,7 @@ export = (dependencies: DepenteniciesData): any => {
          
        
       }else{
-        const token: any = generateToken(addedUser);
+        const token = generateToken(addedUser);
 
         req.session = {
           jwt: token,

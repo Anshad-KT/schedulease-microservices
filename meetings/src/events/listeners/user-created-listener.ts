@@ -27,6 +27,5 @@ export class UserCreatedListener extends Listener<UserCreatedEvent>{
         }
       }
       subject:any= "user:created" 
-      // subject: Subject.UserCreated = Sy;
       queueGroup: string='company-user-service'; 
 }

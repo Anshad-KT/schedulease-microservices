@@ -1,4 +1,4 @@
-import { NotFoundError } from "@intellectx/build";
+import { NotFoundError,errorHandler } from "@intellectx/build";
 import cookieSession from "cookie-session";
 import express, { json } from "express";
 import depentencies from "./config/depentencies";
@@ -18,16 +18,12 @@ app.use(
 
 app.use("/api", routes(depentencies));
 
-app.get("/api/meeting/delete", async (req, res) => {
-  await Meeting.deleteMany();
-  await User.deleteMany();
-  res.json("deleted");
-});
+
    
 app.all("*", async (req, res) => {
   throw new NotFoundError(); 
 });
 
-// app.use(ErrorHandler);
+ app.use(errorHandler);
 
 export { app };

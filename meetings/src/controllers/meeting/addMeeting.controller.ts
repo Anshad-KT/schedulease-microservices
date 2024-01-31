@@ -11,7 +11,7 @@ export = (dependencies: DepenteniciesData): any => {
 
   const addMeeting = async (req: Request, res: Response, next: NextFunction) => {
     try {
-console.log("req-body",req.body);
+
 
       const addedMeeting = await addMeeting_UseCase(dependencies).execute(req.body);
 

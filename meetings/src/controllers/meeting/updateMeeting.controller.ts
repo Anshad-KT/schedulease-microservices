@@ -9,7 +9,7 @@ export = (dependencies: DepenteniciesData): any => {
     useCases: { updateMeeting_UseCase },
   } = dependencies;
 
-  const updateMeeting = async (req: any, res: Response, next: NextFunction) => {
+  const updateMeeting = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const {id,userId,dateOptions,timeOptions} = req.body
 
@@ -23,7 +23,7 @@ export = (dependencies: DepenteniciesData): any => {
        
       }else{
     
-        return   res.json(meetDocuments);
+          res.json(meetDocuments);
         await new MeetingUpdatedPublisher(natsWrapper.client).publish({
             id: meetDocuments._id,
             userId: meetDocuments.userId,

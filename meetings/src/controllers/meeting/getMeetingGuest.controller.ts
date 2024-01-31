@@ -7,7 +7,7 @@ export = (dependencies: DepenteniciesData): any => {
     useCases: { getMeetingGuest_UseCase },
   } = dependencies;
 
-  const getMeetingGuest = async (req: any, res: Response, next: NextFunction) => {
+  const getMeetingGuest = async (req: Request, res: Response, next: NextFunction) => {
     try {
 
       const meetDocuments = await getMeetingGuest_UseCase(dependencies).execute(req.params.id,req.headers['accesstoken'] ? JSON.parse(req.headers['accesstoken'])!.email : "");

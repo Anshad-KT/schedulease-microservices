@@ -9,13 +9,13 @@ export = (dependencies: DepenteniciesData): any => {
 
   const getAllMeetingHost = async (req: any, res: Response, next: NextFunction) => {
     try {
-console.log(JSON.parse(req.headers['accesstoken']).email,"reqhearrrrrrrrr");
+
 
       const meetDocuments = await getAllMeetingHost_UseCase(dependencies).execute(JSON.parse(req.headers['accesstoken'])!.email);
 console.log(meetDocuments);
 
       if (!meetDocuments){
-        return res.json({msg:"error"})
+        return res.json({msg:"error, no decuments found"})
        
        
       }else{

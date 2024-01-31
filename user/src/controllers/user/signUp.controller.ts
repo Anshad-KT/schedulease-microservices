@@ -15,8 +15,8 @@ export = (dependencies: DepenteniciesData): any => {
       const { username, email } = req.body;
    
    
-      if (!username) return res.status(500).json({msg:"Please provide a username"})
-      if (!email) return res.status(500).json({msg:"Please provide a email"})
+      if (!username) return res.status(400).json({msg:"Please provide a username"})
+      if (!email) return res.status(400).json({msg:"Please provide a email"})
    
    
       
@@ -25,7 +25,7 @@ export = (dependencies: DepenteniciesData): any => {
     
      
       if (userPresent) {
-        console.log("doneee");
+       
         
         res.json({msg:"something went wrong"})
       }else{
