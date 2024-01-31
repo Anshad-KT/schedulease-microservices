@@ -25,7 +25,7 @@ console.log(meetDocuments);
          res.json(meetDocuments);
       
 
-      
+       
     } catch (error: any) {
       return res.status(500).json({msg:error.message})
     }

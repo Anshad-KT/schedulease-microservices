@@ -9,7 +9,7 @@ export = (dependencies: DepenteniciesData): any => {
 
   const getAllMeetingHost = async (req: Request, res: Response, next: NextFunction) => {
     try {
-
+ 
       const meetDocuments = await getAllMeetingHost_UseCase(dependencies).execute(req.headers['accesstoken']);
 
       if (!meetDocuments){

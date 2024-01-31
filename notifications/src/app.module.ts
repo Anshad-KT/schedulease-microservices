@@ -4,14 +4,14 @@ import { MeetingsModule } from './meetings/meetings.module';
 import { NatsStreamingTransport } from '@nestjs-plugins/nestjs-nats-streaming-transport';
 
 import { MongooseModule } from '@nestjs/mongoose';
-
+ 
 @Module({  
   imports: [
     MongooseModule.forRoot('mongodb://notifications-mongo-srv/schedulease'),
     UserModule,
     MeetingsModule,
     NatsStreamingTransport.register({
-      clusterId: 'scheduleease', // Specify the cluster ID
+      clusterId: 'scheduleease', 
       clientId: 'qawsw',
       connectOptions: { 
         servers: ['nats://nats1-srv:4222'],
