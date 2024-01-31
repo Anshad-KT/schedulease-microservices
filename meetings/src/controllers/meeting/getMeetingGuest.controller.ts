@@ -14,17 +14,17 @@ export = (dependencies: DepenteniciesData): any => {
 console.log("ytrw",meetDocuments);
  
       if (!meetDocuments){
-        res.json({msg:"error"})
-        throw new BadRequestError("Something Went Wrong");
+        return  res.json({msg:"error"})
+        
        
       }else{
   
-        res.json(meetDocuments);
+        return  res.json(meetDocuments);
       } 
 
       
     } catch (error: any) {
-      throw new Error(error);
+      return  res.status(500).json({msg:error.message})
     }
   };
   return getMeetingGuest;

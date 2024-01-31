@@ -16,8 +16,8 @@ console.log("req-body",req.body);
       const addedMeeting = await addMeeting_UseCase(dependencies).execute(req.body);
 
       if (!addedMeeting){
-        res.json({msg:"error"})
-        throw new BadRequestError("Something Went Wrong");
+        return res.json({msg:"error"})
+       
     
   
       }else{
@@ -32,12 +32,14 @@ console.log("req-body",req.body);
           guests: addedMeeting!.guests,
           isCompleted:addedMeeting!.isCompleted
         }); 
-        res.json({addedMeeting});
+        return res.json({addedMeeting});
       } 
 
       
     } catch (error: any) {
-      throw new Error(error);
+      console.log(error.message);
+      
+      return  res.status(500).json({msg:error.message})
     }
   };
   return addMeeting;

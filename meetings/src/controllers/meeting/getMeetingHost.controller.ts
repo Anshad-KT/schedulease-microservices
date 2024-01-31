@@ -13,17 +13,17 @@ export = (dependencies: DepenteniciesData): any => {
       const meetDocuments = await getMeetingHost_UseCase(dependencies).execute(req.params.id,req.headers['accesstoken'] ? JSON.parse(req.headers['accesstoken'])!.email : "");
 
       if (!meetDocuments){
-        res.json({msg:"error"})
-        throw new BadRequestError("Something Went Wrong");
+        return  res.json({msg:"error"})
+        
        
       }else{
   
-        res.json(meetDocuments);
+        return  res.json(meetDocuments);
       } 
 
       
     } catch (error: any) {
-      throw new Error(error);
+      return  res.status(500).json({msg:error.message})
     }
   };
   return getMeetingHost;

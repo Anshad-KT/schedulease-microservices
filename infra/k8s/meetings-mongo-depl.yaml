@@ -12,6 +12,7 @@ spec:
       labels:   
         app: meetings-mongo 
     spec: 
+      restartPolicy: Always
       containers:
         - name: meetings-mongo
           image: mongo

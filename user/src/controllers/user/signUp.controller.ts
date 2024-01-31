@@ -1,5 +1,5 @@
 import e, { Request, Response, NextFunction } from "express";
-import { BadRequestError, NotAuthorizedError } from "@intellectx/build";
+import { BadRequestError, NotAuthorizedError } from "@geekfindr/common";
 import generateToken from "../../app/externalservice/jsonwebtoken";
 import { UserRegisteredPublisher } from "../../events/publishers/user-registered-publisher";
 import { natsWrapper } from "../../nats-wrapper";
@@ -15,16 +15,18 @@ export = (dependencies: DepenteniciesData): any => {
       const { username, email } = req.body;
    
    
-      if (!username) throw new BadRequestError("Please provide a username");
-      if (!email) throw new BadRequestError("Please provide a email");
+      if (!username) return res.status(500).json({msg:"Please provide a username"})
+      if (!email) return res.status(500).json({msg:"Please provide a email"})
    
    
-     
+      
       const userPresent = await getUser_UseCase(dependencies).execute(email);
 
     
      
       if (userPresent) {
+        console.log("doneee");
+        
         res.json({msg:"something went wrong"})
       }else{
         const addedUser = await signUp_UseCase(dependencies).execute({
@@ -33,7 +35,7 @@ export = (dependencies: DepenteniciesData): any => {
          
           
         }); 
-  
+   
         const token: any = generateToken(addedUser);
   
         req.session = {
@@ -48,15 +50,15 @@ export = (dependencies: DepenteniciesData): any => {
           version:addedUser!.version
         });
   
-        res.json({addedUser,jwt:token});
+        return res.json({addedUser,jwt:token});
   
       }
 
       
       
     } catch (error: any) {
-      res.json({msg:"something went wrong"})
-      throw new Error(error);
+      return res.json({msg:"something went wrong"})
+     
     }
   };
   return signUp;

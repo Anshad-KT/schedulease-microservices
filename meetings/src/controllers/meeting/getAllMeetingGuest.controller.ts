@@ -17,17 +17,17 @@ console.log(req.headers['accesstoken']?.email as headertp);
 console.log(meetDocuments);
 
       if (!meetDocuments){
-        res.json({msg:"error"})
-        throw new BadRequestError("Something Went Wrong");
+        return  res.json({msg:"error"})
+        
        
-      }else{
+      }
   
-        res.json(meetDocuments);
-      } 
+         res.json(meetDocuments);
+      
 
       
     } catch (error: any) {
-      throw new Error(error);
+      return res.status(500).json({msg:error.message})
     }
   };
   return getAllMeetingGuest;

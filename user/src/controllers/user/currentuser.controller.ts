@@ -13,9 +13,9 @@ export = (dependencies: DepenteniciesData): any => {
   ) => {
     try {  
 
-      res.json(req.session);
+      return   res.json(req.session);
     } catch (error: any) {
-      throw new Error(error);
+      return   res.status(500).json({msg:error.message})
     }
   };
   return currentUser;

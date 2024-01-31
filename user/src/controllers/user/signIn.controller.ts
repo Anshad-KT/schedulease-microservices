@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { BadRequestError, NotAuthorizedError } from "@intellectx/build";
+import { BadRequestError, NotAuthorizedError } from "@geekfindr/common";
 import generateToken from "../../app/externalservice/jsonwebtoken";
 import { DepenteniciesData } from "../../entities/interfaces";
 
@@ -12,7 +12,7 @@ export = (dependencies: DepenteniciesData): any => {
     try {
       const { email, username } = req.body;
 
-      if (!email) throw new BadRequestError("Please provide a email");
+      if (!email) return res.status(500).json({msg:"No email present"})
 
 
       const addedUser = await signIn_UseCase(dependencies).execute({
@@ -21,8 +21,8 @@ export = (dependencies: DepenteniciesData): any => {
       });
 
       if (!addedUser){
-        res.json({msg:"error"})
-            throw new BadRequestError("Invalid Credentials");
+        return  res.json({msg:"error"})
+         
        
       }else{
         const token: any = generateToken(addedUser);
@@ -32,12 +32,14 @@ export = (dependencies: DepenteniciesData): any => {
           userDetails: addedUser,
         };
   
-        res.json({addedUser,jwt:token});
+        return  res.json({addedUser,jwt:token});
       } 
 
       
     } catch (error: any) {
-      throw new Error(error);
+      console.log(error);
+      
+      return  res.json({msg:"something went wrong"})
     }
   };
   return signIn;

@@ -3,12 +3,12 @@ kind: Deployment
 metadata:
   name: user-depl
 spec:
-  replicas: 1 
-  selector: 
+  replicas: 1
+  selector:
     matchLabels:
-      app: user 
-  template: 
-    metadata: 
+      app: user
+  template:
+    metadata:
       labels:
         app: user
     spec:
@@ -18,23 +18,24 @@ spec:
           env:
             - name: MONGO_URL
               value: mongodb://user-mongo-srv/schedulease
-            - name: JWT_KEY 
-              valueFrom: 
+            - name: JWT_KEY
+              valueFrom:
                 secretKeyRef:
-                  name: jwt-secret
+                  name: jwt-secretcode
                   key: JWT_KEY
-            - name: NODEPASS 
-              valueFrom: 
+            - name: NODEPASS
+              valueFrom:
                 secretKeyRef:
                   name: nodepass
                   key: NODEPASS
----  
+
+---
 apiVersion: v1
 kind: Service
 metadata:
   name: user-srv
-spec: 
-  selector: 
+spec:
+  selector:
     app: user
   ports:
     - name: user

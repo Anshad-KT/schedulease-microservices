@@ -4,9 +4,9 @@ export = (dependencies: DepenteniciesData): any => {
   const signOut = async (req: Request, res: Response, next: NextFunction) => {
     try {
       req.session = null;
-      res.json({ status: true, content: "Successfully Logged out" });
+      return  res.json({ status: true, content: "Successfully Logged out" });
     } catch (error: any) {
-      throw new Error(error);
+      return  res.status(500).json({msg:error.message})
     }
   };
   return signOut;

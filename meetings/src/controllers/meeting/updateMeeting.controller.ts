@@ -18,12 +18,12 @@ export = (dependencies: DepenteniciesData): any => {
 
  
       if (!meetDocuments){
-        res.json({msg:"error"})
-        throw new BadRequestError("Something Went Wrong");
+        return  res.json({msg:"error"})
+   
        
       }else{
     
-        res.json(meetDocuments);
+        return   res.json(meetDocuments);
         await new MeetingUpdatedPublisher(natsWrapper.client).publish({
             id: meetDocuments._id,
             userId: meetDocuments.userId,
@@ -33,7 +33,7 @@ export = (dependencies: DepenteniciesData): any => {
       }
       
     } catch (error: any) {
-      throw new Error(error);
+      return  res.status(500).json({msg:error.message})
     }
   };
   return updateMeeting;
